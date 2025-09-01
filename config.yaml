@@ -1,0 +1,39 @@
+experiment:
+  name: rt_proxy_rts
+  seed: 42
+  save_dir: checkpoints/
+  save: False # Save trained models and/ or results
+  
+paths:
+  data_dir: data/                  # Local or absolute path to data folder
+  save_dir: checkpoints/          # Where to save model checkpoints, logs
+  results_dir: results/           # Optional: for evaluation outputs, plots
+  rts_scenario_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data' 
+
+
+shared_data:
+  frequency: '1h'
+  horizon: 1
+  lag_measurements: 3
+  lead_horizon: 0
+  validation_perc: 0.15
+  model_norm_list: ['l2_squared', 'l1', 'linf', 'l1-linf']
+  target_zone: ['CENTRL', 'WEST', 'GENESE', 'MHK VL', 'NORTH', 'LONGIL', 'N.Y.C.']
+splits:    
+  train_start: '2020-08-01'
+  test_start:  '2018-09-01'
+
+models:
+
+  norm:
+    class: NormEBM
+    hidden_sizes: [128, 128, 128]
+    mse_reg_weight: 1
+    sq_reg_weight: 0.0
+    lr: 0.001
+    batch_size: 512
+    epochs: 500
+    weight_decay: 0.0001
+    warm_start: True
+    max_grad_norm: 2
+    orthog_reg_weight: 1
