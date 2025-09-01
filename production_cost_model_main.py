@@ -130,8 +130,8 @@ def ED_single_period(grid, c_viol = 1e3):
     ### variables    
     # DA Variables                        
     p_G = cp.Variable((grid['n_unit']), nonneg = True, name = 'p_G')
-    pos_slack = cp.Variable((grid['n_nodes']), nonneg = True, name = 'pos_slack')
-    neg_slack = cp.Variable((grid['n_nodes']), nonneg = True, name = 'neg_slack')
+    pos_slack = cp.Variable((grid['n_nodes']), nonneg = True, name = 'pos_slack')   # load shedding
+    neg_slack = cp.Variable((grid['n_nodes']), nonneg = True, name = 'neg_slack')   # renewable curtailment
     gen_cost = cp.Variable((1), name = 'gen_cost')
     
     f_margin_up = cp.Variable((grid['n_lines']), nonneg = True, name = 'f_margin_up')
@@ -143,7 +143,7 @@ def ED_single_period(grid, c_viol = 1e3):
                       grid['Line_Capacity'].reshape(-1) - f_margin_up == PTDF@( node_G@p_G - node_L@(net_load_hat - pos_slack + neg_slack)),
                       grid['Line_Capacity'].reshape(-1) - f_margin_down == -PTDF@( node_G@p_G - node_L@(net_load_hat - pos_slack + neg_slack)), 
                       gen_cost == grid['Cost']@p_G + c_viol*(pos_slack.sum()) + 0*neg_slack.sum()]
-    
+        
     objective_funct = cp.Minimize( gen_cost )         
     ed_prob = cp.Problem(objective_funct, Constraints)
     
@@ -156,9 +156,9 @@ with open("config.yaml") as f:
 
 grid = create_grid_dict(f'{cd}\\data\\RTS_GMLC.m')
 scenarios_path = config['paths']['rts_scenario_data_dir']
-
+pglib_path = config['paths']['pglib_data_dir']
 matgrid = CaseFrames(f'{cd}\\data\\RTS_GMLC.m')
-v2_matgrid = CaseFrames('C:\\Users\\akyla\\pglib-opf\\pglib_opf_case73_ieee_rts.m')
+v2_matgrid = CaseFrames(f'{pglib_path}\\pglib_opf_case73_ieee_rts.m')
 
 #%%
 
@@ -274,7 +274,7 @@ for i in range(nl_actual_df.shape[0]):
         for key in scenario_out_dict.keys():            
             Output[key] = np.concatenate([Output[key], np.expand_dims(scenario_out_dict[key], axis = 0)], axis = 0) 
     
-    if i%100==0:
+    if (config['experiment']['save'] == True) and (i%100==0):
         with open(f'{cd}\\checkpoints\\RTS_no_reserves_single_period.m.pickle', 'wb') as handle:
             pickle.dump(Output, handle, protocol=pickle.HIGHEST_PROTOCOL)
 

@@ -8,17 +8,20 @@ paths:
   data_dir: data/                  # Local or absolute path to data folder
   save_dir: checkpoints/          # Where to save model checkpoints, logs
   results_dir: results/           # Optional: for evaluation outputs, plots
-  rts_scenario_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data' 
+  rts_scenario_data_dir: 'C:\Users\ucbva19\OneDrive - University College London\RTS_GMLC_data' 
+  pglib_data_dir: 'C:\Users\ucbva19\Git projects\pglib-opf' 
+
+  # rts_scenario_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data' 
+  # pglib_data_dir: 'C:\Users\akyla\pglib-opf' 
 
 
 shared_data:
+  reserves: 0 # Reserve requirements, percentage of aggregate error [0.05, 0.025, 0, nan]
   frequency: '1h'
   horizon: 1
+  ramping: True # Including ramping constraints (for multi-period formulation only)
   lag_measurements: 3
-  lead_horizon: 0
   validation_perc: 0.15
-  model_norm_list: ['l2_squared', 'l1', 'linf', 'l1-linf']
-  target_zone: ['CENTRL', 'WEST', 'GENESE', 'MHK VL', 'NORTH', 'LONGIL', 'N.Y.C.']
 splits:    
   train_start: '2020-08-01'
   test_start:  '2018-09-01'
