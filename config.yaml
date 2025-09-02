@@ -8,10 +8,13 @@ paths:
   data_dir: data/                  # Local or absolute path to data folder
   save_dir: checkpoints/          # Where to save model checkpoints, logs
   results_dir: results/           # Optional: for evaluation outputs, plots
-  # rts_scenario_data_dir: 'C:\Users\ucbva19\OneDrive - University College London\RTS_GMLC_data' 
-  # pglib_data_dir: 'C:\Users\ucbva19\Git projects\pglib-opf' 
-  rts_scenario_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data' 
-  pglib_data_dir: 'C:\Users\akyla\pglib-opf' 
+  rts_scenario_data_dir: 'C:\Users\ucbva19\OneDrive - University College London\RTS_GMLC_data' 
+  pglib_data_dir: 'C:\Users\ucbva19\Git projects\pglib-opf' 
+  optim_output_data_dir: 'C:\Users\ucbva19\OneDrive - University College London\RTS_GMLC_data\checkpoints'
+
+  # optim_output_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data\checkpoints'
+  # rts_scenario_data_dir: 'C:\Users\akyla\OneDrive - University College London\RTS_GMLC_data' 
+  # pglib_data_dir: 'C:\Users\akyla\pglib-opf' 
 
 
 shared_data:

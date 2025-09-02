@@ -10,6 +10,16 @@ from matpowercaseframes import CaseFrames
 import numpy as np
 import pandas as pd
 
+# def empirical_quantile(y_samples: torch.Tensor, q_grid: torch.Tensor) -> torch.Tensor:
+#     """
+#     y_samples: (Ny,)
+#     q_grid:    (Q,)
+#     returns:   (Q,)
+#     """
+#     sorted_y, _ = torch.sort(y_samples)
+#     idx = (q_grid * (len(sorted_y) - 1)).long()
+#     return sorted_y[idx]
+
 def create_grid_dict(path, save = False):
     ''' reads .m file with matpowercaseframes, returns dictionary with problem matrices'''
 

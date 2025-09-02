@@ -67,7 +67,7 @@ print(nl_scenarios_tensor.shape)  # should be (time periods, nodes, scenarios)
 
 ## Target/ response data: histograms/ outputs of optimization solver
 # !!!!! Add to config file
-opt_output_path = 'C:\\Users\\akyla\\OneDrive - University College London\\RTS_GMLC_data\\checkpoints'
+opt_output_path = config['paths']['optim_output_data_dir']
 
 # !!!!! Read this from config file, based on experiment name
 target_file = 'RTS_no_reserves_single_period.m.pickle'
