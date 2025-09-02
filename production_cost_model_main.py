@@ -265,6 +265,8 @@ for i in range(nl_actual_df.shape[0]):
     
     # Concatenate over observations
     
+    
+    # !!!!!! Save this at lower resolution (float32 or even smaller, to save memory)
     if i == 0:
         Output = {}
         
@@ -274,9 +276,9 @@ for i in range(nl_actual_df.shape[0]):
         for key in scenario_out_dict.keys():            
             Output[key] = np.concatenate([Output[key], np.expand_dims(scenario_out_dict[key], axis = 0)], axis = 0) 
     
-    if (config['experiment']['save'] == True) and (i%100==0):
-        with open(f'{cd}\\checkpoints\\RTS_no_reserves_single_period.m.pickle', 'wb') as handle:
-            pickle.dump(Output, handle, protocol=pickle.HIGHEST_PROTOCOL)
+if (config['experiment']['save'] == True) and (i%100==0):
+    with open(f'{cd}\\checkpoints\\RTS_no_reserves_single_period.m.pickle', 'wb') as handle:
+        pickle.dump(Output, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 # plt.plot(nl_forecast_df.iloc[0].values)
 # plt.plot(nl_forecast_df.iloc[9].values)
